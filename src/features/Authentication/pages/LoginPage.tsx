@@ -1,7 +1,7 @@
 import type { AuthFormData } from "@/types/types";
 import React, { useState } from "react";
 import LoginForm from "../components/LoginForm";
-import { useAuth } from "@/app/AuthContext";
+import { useAuth } from "@/app/contexts/AuthContext";
 import { useNavigate } from "react-router";
 
 

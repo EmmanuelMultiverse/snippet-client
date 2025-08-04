@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 import Button from "./Button";
-import QuestionBoxLabel from "./QuestionBoxLabel";
 import type { Question } from "@/types/types";
 import { useNavigate } from "react-router";
 
@@ -8,6 +7,10 @@ interface QuestionBoxProps {
     question: Question,
     maxHeight?: number;
     onResize?: ( height: number) => void;
+}
+
+interface QuestionBoxLabelProps {
+    question: string;
 }
 
 const QuestionBox = ({ question, maxHeight, onResize }: QuestionBoxProps) => {
@@ -35,6 +38,14 @@ const QuestionBox = ({ question, maxHeight, onResize }: QuestionBoxProps) => {
                 <Button label="Answer" handleClick={() => navigate(`/questions/${question.id}`)} />
                 <Button label="Solutions" handleClick={() => navigate(`/questions/${question.id}/solutions`)} />
             </div>
+        </div>
+    )
+}
+
+const QuestionBoxLabel = ({ question }: QuestionBoxLabelProps) => {
+    return (
+        <div className="rounded-md text-white">
+            {question}
         </div>
     )
 }

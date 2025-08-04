@@ -1,5 +1,5 @@
 import QuestionBox from "@/components/QuestionBox";
-import { getQuestions, getSolutions } from "@/utils";
+import { getQuestions, getSolutions } from "@/utils/utils";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router"
 import type {Question, Solution} from "@/types/types"
