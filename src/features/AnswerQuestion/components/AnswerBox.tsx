@@ -14,7 +14,7 @@ import 'prismjs/components/prism-typescript';
 import 'prismjs/themes/prism-okaidia.css';
 
 import Select from "react-select";
-import type { ActionMeta, SingleValue } from "react-select";
+import type { SingleValue } from "react-select";
 import type { LanguageOptions } from "../types/types.ts";
 import { languageOptions } from "../types/types.ts";
 import { useQuestionDetails } from "../SolutionsContext.tsx";
@@ -26,7 +26,7 @@ const AnswerBox = () => {
     const [codeSnippet, setCodeSnippet] = useState<string>("javascript");
     const [selectedLanguage, setSelectedLanguage] = useState<SingleValue<LanguageOptions>>(languageOptions[0]);
 
-    const handleLanguageChange = (newValue: SingleValue<LanguageOptions>, actionMeta: ActionMeta<LanguageOptions>) => {
+    const handleLanguageChange = (newValue: SingleValue<LanguageOptions>) => {
         setSelectedLanguage(newValue);
     }
 
