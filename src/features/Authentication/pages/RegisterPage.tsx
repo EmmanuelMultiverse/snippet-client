@@ -37,8 +37,8 @@ const RegisterPage = () => {
     }
 
     return (
-        <div>
-            <h2> Register </h2>
+        <div className="bg-[#272822] text-white rounded-md p-3 flex-col">
+            <h2 className="text-center"> Register </h2>
             <RegisterForm 
                 formData={formData}
                 handleChange={handleChange}

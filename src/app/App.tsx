@@ -1,51 +1,35 @@
 import "./App.css";
-import AnswerBox from "@/features/Questions/components/AnswerBox";
-import CodingBox from "@/features/Editor/components/CodingBox";
-import QuestionBox from "@/features/Questions/components/QuestionBox";
-import WhiteHouseIcon from "@/assets/white_house_icon.svg"
-import solutionsSeed from "../../Data/SolutionsData.json";
-import questionsSeed from "../../Data/QuestionsData.json"
 
-
-import { useEffect, useState } from "react";
-
-import type { SolutionsMap } from '@/types/types';
-import LoginPage from "@/features/Authentication/pages/LoginPage";
 import { Route, Routes } from "react-router";
+import { AuthProvider } from "@/app/AuthContext";
+
+import LoginPage from "@/features/Authentication/pages/LoginPage";
 import RegisterPage from "@/features/Authentication/pages/RegisterPage";
 import AuthLayout from "./Layouts/AuthLayout";
 import AppLayout from "./Layouts/AppLayout";
-import QuestionPage from "@/features/Questions/pages/QuestionsPage";
+import HomePage from "./pages/Homepage";
+import AnswerQuestionPage from "@/features/AnswerQuestion/pages/AnswerQuestionPage";
+import QuestionSolutionsPage from "@/features/QuestionSolutions/QuestionSolutionsPage";
 
 
 function App() {
-
-  const [answerBox, setAnswerBox] = useState<Boolean>(false);
-  const [solutionBox, setSolutionBox] = useState<Boolean>(false);
-  const [currentQuestion, setCurrentQuestion] = useState<string>("");
-  const [solutions, setSolutions] = useState<SolutionsMap>(solutionsSeed);
-  const [loggedIn, toggleLoggedIn] = useState<Boolean>(false);
-
-  const IS_DEV = process.env.DEV;
-
-  if (IS_DEV) {
-    return (
+  return (
+    <AuthProvider>
       <Routes>
-        <Route index element={<RegisterPage />} />
-        
         <Route element={< AuthLayout />}>
+          <Route index element={<RegisterPage />} />
           <Route path="login" element={<LoginPage />}/>
           <Route path="register" element={<RegisterPage />}/>
         </Route>
 
         <Route element={< AppLayout />}>
-            <Route path="questions" element={<QuestionPage />} />
+            <Route path="homepage" element={<HomePage />} />
+            <Route path="questions/:id" element={<AnswerQuestionPage />} />
+            <Route path="questions/:id/solutions" element={<QuestionSolutionsPage />} />
         </Route>
-        
-
       </Routes>
-    )
-  }
+    </AuthProvider>
+  )
 }
   
 //   if (!loggedIn) {

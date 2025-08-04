@@ -1,12 +1,13 @@
-export interface CodingSnippet {
+export interface Solution {
+  id: number;
+  questionId: number;
   language: string;
-  codingSnippet: string;
+  codeSnippet: string;
 }
 
-export type SolutionEntry = CodingSnippet[];
-
-export interface SolutionsMap {
-  [question: string]: SolutionEntry;
+export interface Question {
+  id: number;
+  text: string;
 }
 
 interface AuthFormData {

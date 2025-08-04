@@ -3,6 +3,7 @@ import { highlight } from "prismjs";
 import { useState } from "react";
 import { getPrismLanguage  } from "../Utils.ts";
 
+import 'prismjs'; 
 import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-python'; 
@@ -14,14 +15,13 @@ import 'prismjs/themes/prism-okaidia.css';
 
 import Select from "react-select";
 import type { ActionMeta, SingleValue } from "react-select";
-import type { LanguageOptions, SolutionSnippet } from "../types/types.ts";
+import type { LanguageOptions } from "../types/types.ts";
 import { languageOptions } from "../types/types.ts";
+import { useQuestionDetails } from "../SolutionsContext.tsx";
+import type { Solution } from "@/types/types.js";
+import { useNavigate } from "react-router";
 
-interface AnswerBoxProps {
-    question: string;
-}
-
-const AnswerBox = ({ question }: AnswerBoxProps) => {
+const AnswerBox = () => {
 
     const [codeSnippet, setCodeSnippet] = useState<string>("javascript");
     const [selectedLanguage, setSelectedLanguage] = useState<SingleValue<LanguageOptions>>(languageOptions[0]);
@@ -30,22 +30,27 @@ const AnswerBox = ({ question }: AnswerBoxProps) => {
         setSelectedLanguage(newValue);
     }
 
+    const navigate = useNavigate();
+
+    const { solutions, setSolutions, question } = useQuestionDetails();
+
     const handleSubmit = () => {
         
-        const newSolution: SolutionSnippet = {
+        const newSolution: Solution = {
+            id: solutions.length + 1,
+            questionId: question?.id || -1,
             language: selectedLanguage?.value || "",
-            codingSnippet: codeSnippet, 
+            codeSnippet: codeSnippet,
         }
 
         setSolutions(prev => {
-            const existingSolutions = prev[question] || [];
-
-            return {
+            return [
                 ...prev,
-                [question]: [...existingSolutions, newSolution],
-
-            }
+                newSolution
+            ]
         })
+
+        navigate(`/questions/${question?.id}/solutions`)
     }
 
     return (

@@ -8,7 +8,7 @@ interface CodingBoxProps {
 
 const CodingBox = ({ language, codingSnippet }: CodingBoxProps) => {
     return (
-        <div className="flex flex-col gap-2 bg-[#272822] p-4 rounded-md w-90 h-50"> 
+        <div className="flex flex-col gap-2 bg-[#272822] p-4 rounded-md w-150 h-100"> 
             <div className="text-white text-lg font-bold">Coding Language: {language}</div>
             <SyntaxHighlighter
                 language={language}

@@ -3,17 +3,6 @@ export interface LanguageOptions {
     label: string;
 }
 
-export interface SolutionSnippet {
-  language: string;
-  codingSnippet: string;
-  id: string;
-  questionId: string;
-}
-
-export interface SolutionsMap {
-  [key: string]: SolutionSnippet[];
-}
-
 export enum CodeLanguage {
     JavaScript = 'javascript',
     Python = 'python',
@@ -21,6 +10,7 @@ export enum CodeLanguage {
     HTML = 'html',
     CSS = 'css',
     TypeScript = 'typescript',
+    CPP = "cpp"
 }
 
 export const languageOptions: LanguageOptions[] = [
@@ -30,4 +20,6 @@ export const languageOptions: LanguageOptions[] = [
         { value: CodeLanguage.HTML, label: "HTML" },
         { value: CodeLanguage.CSS, label: "CSS" },
         { value: CodeLanguage.TypeScript, label: "TypeScript" },
+        { value: CodeLanguage.CPP, label: "cpp" },
+        
 ];

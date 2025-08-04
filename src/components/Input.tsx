@@ -9,7 +9,7 @@ const Input = ({ label, value, handleChange }: inputProps) => {
     return (
         <label className="h-full flex flex-col gap-2">
             {label.charAt(0).toUpperCase() + label.slice(1)}
-            <input type="text" className="border-1 rounded-md" value={value} name={label} onChange={handleChange}/>
+            <input type="text" className="border-1 rounded-md p-1" value={value} name={label} onChange={handleChange}/>
         </label>
     )
 }

@@ -1,11 +1,14 @@
 import type { AuthFormData } from "@/types/types";
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
 import LoginForm from "../components/LoginForm";
+import { useAuth } from "@/app/AuthContext";
+import { useNavigate } from "react-router";
+
 
 const LoginPage = () => {
 
-    let navigate = useNavigate();
+    const { handleLogin } = useAuth();
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState<AuthFormData>({
         username: "",
@@ -21,21 +24,25 @@ const LoginPage = () => {
 
     }
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log(`Logged In: ${formData.username} ${formData.password}`)
 
-        setFormData(() => ({
-            username: "",
-            password: "",
+        let res = await handleLogin({ username: formData.username, password: formData.password});
 
-        }))
-        navigate("/questions");
+        if (res.success) {
+            setFormData(() => ({
+                username: "",
+                password: "",
+    
+            }))
+            navigate("/homepage");
+        } 
     }
 
     return (
-        <div>
-            <h2> Login </h2>
+        <div className="bg-[#272822] text-white rounded-md p-3 flex-col">
+            <h2 className="text-center"> Login </h2>
             <LoginForm 
                 data={formData}
                 handleChange={handleChange}
